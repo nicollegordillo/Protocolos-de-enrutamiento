@@ -1,0 +1,19 @@
+# generados al correr los nodos
+tables*/
+logs*/
+*.csv
+
+# configuraciones con IP reales de Tailscale: se generan el dia de la prueba
+# y no se versionan (traen direcciones de las maquinas de los companeros)
+configs/tailscale/
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# editores y sistema
+.vscode/
+.idea/
+.DS_Store
