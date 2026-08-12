@@ -1,0 +1,26 @@
+{
+  "node_id": "A",
+  "listen_ip": "0.0.0.0",
+  "listen_port": 5001,
+  "role": "router",
+  "neighbors": [
+    {
+      "node_id": "B",
+      "ip": "127.0.0.1",
+      "port": 5002,
+      "cost": 2
+    },
+    {
+      "node_id": "C",
+      "ip": "127.0.0.1",
+      "port": 5003,
+      "cost": 7
+    },
+    {
+      "node_id": "I",
+      "ip": "127.0.0.1",
+      "port": 5009,
+      "cost": 1
+    }
+  ]
+}

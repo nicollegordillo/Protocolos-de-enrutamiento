@@ -1,0 +1,39 @@
+{
+  "_comentario": [
+    "Topologia del Laboratorio 3 (Imagen 1 del enunciado).",
+    "Los costos deben confirmarse con las otras 2 parejas antes de la prueba en clase:",
+    "todos los grupos tienen que usar los mismos, si no las rutas no coinciden.",
+    "Para la prueba real sobre Tailscale, cambie el campo 'ip' de cada nodo por la",
+    "IP 100.x.x.x que Tailscale le asigno a esa maquina y vuelva a generar los configs.",
+    "Los nodos cliente/servidor no van en 'links': se conectan por 'gateway'."
+  ],
+
+  "links": [
+    ["A", "B", 2],
+    ["A", "I", 1],
+    ["A", "C", 7],
+    ["B", "F", 1],
+    ["F", "D", 1],
+    ["F", "G", 3],
+    ["F", "H", 4],
+    ["I", "D", 6],
+    ["C", "D", 5],
+    ["D", "E", 3],
+    ["E", "G", 4]
+  ],
+
+  "nodes": {
+    "A": { "role": "router", "ip": "127.0.0.1", "port": 5001, "pareja": 1 },
+    "B": { "role": "router", "ip": "127.0.0.1", "port": 5002, "pareja": 1 },
+    "C": { "role": "router", "ip": "127.0.0.1", "port": 5003, "pareja": 1 },
+    "D": { "role": "router", "ip": "127.0.0.1", "port": 5004, "pareja": 2 },
+    "E": { "role": "router", "ip": "127.0.0.1", "port": 5005, "pareja": 2 },
+    "F": { "role": "router", "ip": "127.0.0.1", "port": 5006, "pareja": 2 },
+    "G": { "role": "router", "ip": "127.0.0.1", "port": 5007, "pareja": 3 },
+    "H": { "role": "router", "ip": "127.0.0.1", "port": 5008, "pareja": 3 },
+    "I": { "role": "router", "ip": "127.0.0.1", "port": 5009, "pareja": 3 },
+
+    "cliente1":  { "role": "client", "ip": "127.0.0.1", "port": 6001, "gateway": "H" },
+    "servidor1": { "role": "server", "ip": "127.0.0.1", "port": 6002, "gateway": "C" }
+  }
+}
