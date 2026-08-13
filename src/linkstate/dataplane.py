@@ -1,11 +1,10 @@
-
 from __future__ import annotations
 
 import json
 import logging
 from dataclasses import dataclass
 
-import hamming
+from . import hamming
 
 logger = logging.getLogger("dataplane")
 
@@ -59,8 +58,6 @@ def encode_packet(packet: DataPacket) -> str:
     return hamming.encode(_text_to_bits(text))
 
 
-
-
 def decode_packet(bits: str) -> tuple[DataPacket, bool]:
 
     raw, corrected = hamming.decode(bits)
@@ -76,11 +73,12 @@ def is_data_frame(line: str) -> bool:
 
 class Forwarding:
 
+
     def __init__(self, node):
         self.node = node
         self.cfg = node.cfg
         self.log = node.log
-        self.control = node.control
+        self.control = node.control 
 
     def originate(self, from_id: str, to_id: str, payload: str) -> bool:
         return self._forward(DataPacket(from_id, to_id, payload, hops=0))
@@ -99,7 +97,7 @@ class Forwarding:
             return
 
         if packet.hops >= MAX_HOPS:
-            self.log(f"mensaje {packet.from_id}->{packet.to_id} descartado: excede MAX_HOPS")
+            self.log(f"mensaje {packet.from_id}->{packet.to_id} descartado: excede hops")
             return
 
         self._forward(packet)
@@ -108,7 +106,7 @@ class Forwarding:
         self.log(f"mensaje entregado: {packet.from_id} -> {packet.to_id}: {packet.payload!r}")
         host = self.cfg.peer(packet.to_id) if packet.to_id in self.cfg.host_ids else None
         if host is None:
-            return
+            return 
         from . import transport
         try:
             transport.send_json(host.ip, host.port, packet.to_dict())
@@ -130,8 +128,9 @@ class Forwarding:
             return True
         except OSError as exc:
             self.log(f"no se pudo reenviar hacia {packet.to_id} via "
-                    f"{route.ip}:{route.port}: {exc}")
+                     f"{route.ip}:{route.port}: {exc}")
             return False
+
 
 def dispatch_line(line: str, addr: tuple, *, forwarding: Forwarding, control) -> None:
     if is_data_frame(line):
