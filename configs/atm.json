@@ -1,0 +1,9 @@
+{
+  "node_id": "atm",
+  "listen_ip": "127.0.0.1",
+  "listen_port": 6100,
+  "role": "client",
+  "neighbors": [
+    {"node_id": "u", "ip": "127.0.0.1", "port": 5100, "cost": 0}
+  ]
+}

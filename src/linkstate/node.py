@@ -10,6 +10,7 @@ from pathlib import Path
 from . import dataplane, transport
 from .config import NodeConfig
 from .control import ControlPlane
+from . import banking
 
 
 class Node:
@@ -157,9 +158,31 @@ def main(argv=None) -> None:
                         help="carpeta donde escribir nodo_tabla_enrutamiento.csv")
     parser.add_argument("--quiet", action="store_true",
                         help="no imprimir la tabla en cada recalculo de Dijkstra")
+    parser.add_argument("--bank-client", action="store_true",
+                        help="ejecuta el ATM bancario interactivo sobre MESSAGE")
+    parser.add_argument("--bank-server", action="store_true",
+                        help="ejecuta el servidor bancario sobre MESSAGE")
+    parser.add_argument("--bank-id", default="servidor_bancario",
+                        help="node_id del servidor bancario para el ATM")
     args = parser.parse_args(argv)
 
+    if args.bank_client and args.bank_server:
+        parser.error("--bank-client y --bank-server son excluyentes")
+
     cfg = NodeConfig.load(args.config)
+
+    if args.bank_client:
+        if cfg.role != "client":
+            parser.error("--bank-client requiere role='client'")
+        banking.run_atm_client(cfg, bank_id=args.bank_id)
+        return
+
+    if args.bank_server:
+        if cfg.role != "server":
+            parser.error("--bank-server requiere role='server'")
+        banking.run_atm_server(cfg)
+        return
+
     node = Node(cfg, table_dir=args.table_dir, verbose=not args.quiet)
 
     if cfg.role == "client":

@@ -1,0 +1,12 @@
+{
+  "node_id": "z",
+  "listen_ip": "127.0.0.1",
+  "listen_port": 5103,
+  "role": "router",
+  "neighbors": [
+    {"node_id": "y", "ip": "127.0.0.1", "port": 5102, "cost": 1}
+  ],
+  "hosts": [
+    {"node_id": "servidor_bancario", "ip": "127.0.0.1", "port": 6101}
+  ]
+}
