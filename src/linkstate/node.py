@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 
 import argparse
@@ -65,7 +64,7 @@ class Node:
             return
 
         if msg.get("type") == "MESSAGE":
-            self.forwarding.originate(msg["from"], msg["to"], msg["payload"])
+            self.forwarding.originate(msg["from"], msg["to"], msg["payload"], addr)
         else:
             self.control.handle(msg)
 

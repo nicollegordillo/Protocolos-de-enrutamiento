@@ -5,9 +5,9 @@
   "role": "server",
   "neighbors": [
     {
-      "node_id": "C",
+      "node_id": "z",
       "ip": "127.0.0.1",
-      "port": 5003,
+      "port": 5006,
       "cost": 0
     }
   ]

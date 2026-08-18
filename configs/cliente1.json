@@ -5,9 +5,9 @@
   "role": "client",
   "neighbors": [
     {
-      "node_id": "H",
+      "node_id": "u",
       "ip": "127.0.0.1",
-      "port": 5008,
+      "port": 5001,
       "cost": 0
     }
   ]
